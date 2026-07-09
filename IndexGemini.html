@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Goslin | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Urbanist:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Design Tokens & Variables */
+        :root {
+            --bg-color: #FFF5F0; /* Soft peach */
+            --text-color: #262626; /* Charcoal */
+            --accent-color: #FF6B6B; /* Coral */
+            --card-bg: #FFFFFF;
+            --card-shadow: rgba(255, 107, 107, 0.08);
+            --border-color: rgba(38, 38, 38, 0.05);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212; 
+            --text-color: #F5F5F5; 
+            --accent-color: #FF7B7B; 
+            --card-bg: #1A1A1A;
+            --card-shadow: rgba(0, 0, 0, 0.3);
+            --border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Urbanist', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation / Header */
+        header {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            color: var(--text-color);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 6rem 0;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .profile-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 4px solid var(--accent-color);
+            border-radius: 50%;
+            animation: pulse 3s infinite;
+        }
+
+        .profile-pic {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 144px;
+            height: 144px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--text-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        /* Section Layouts */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Grid Framework */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Cards Style */
+        .card {
+            background: var(--card-bg);
+            padding: 2.5rem 2rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px var(--card-shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        /* Traits / Skills */
+        .trait-card {
+            text-align: center;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--accent-color);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .trait-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Learning Journey */
+        .journey-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(255, 107, 107, 0.15);
+            color: var(--accent-color);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .journey-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Editorial Sections (Mission & Future) */
+        .editorial-block {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .mission-text {
+            font-size: 1.6rem;
+            line-height: 1.7;
+            font-weight: 400;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .project-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.04); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            section { padding: 3.5rem 0; }
+            .mission-text { font-size: 1.3rem; }
+            .project-text { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+                <span id="toggleIcon">🌙</span> <span id="toggleText">Dark Mode</span>
+            </button>
+        </header>
+
+        <section class="hero">
+            <div class="profile-wrapper">
+                <div class="profile-ring"></div>
+                <div class="profile-pic">
+                    MG
+                </div>
+            </div>
+            <h1>Built to Lead.<br>Driven to Create.</h1>
+            <p>Hi, I'm Michael Goslin. I explore the intersections of Business Intelligence, software development, and generative AI to craft intuitive digital experiences.</p>
+        </section>
+
+        <hr style="border: 0; border-top: 1px solid var(--border-color);">
+
+        <section>
+            <div class="editorial-block">
+                <p class="mission-text">
+                    “Michael is committed to learning, creating, and leading with purpose — using strength, clarity, and experience to build meaningful work as he grows in BI, software, and generative AI.”
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Skills & Strengths</h2>
+            <div class="grid-4">
+                <div class="card trait-card">
+                    <div class="icon">⚡</div>
+                    <h3>Strength</h3>
+                </div>
+                <div class="card trait-card">
+                    <div class="icon">✨</div>
+                    <h3>Clarity</h3>
+                </div>
+                <div class="card trait-card">
+                    <div class="icon">👑</div>
+                    <h3>Leadership</h3>
+                </div>
+                <div class="card trait-card">
+                    <div class="icon">💎</div>
+                    <h3>Experience</h3>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Learning Journey</h2>
+            <div class="grid-3">
+                <div class="card journey-card">
+                    <span class="journey-tag">Currently Learning</span>
+                    <h3>Business Intelligence</h3>
+                </div>
+                <div class="card journey-card">
+                    <span class="journey-tag">Exploring</span>
+                    <h3>Software Development</h3>
+                </div>
+                <div class="card journey-card">
+                    <span class="journey-tag">Next Up</span>
+                    <h3>Generative AI</h3>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Future Vision</h2>
+            <div class="editorial-block">
+                <p class="project-text">
+                    “I’m exploring how adaptive AI can use creative tools and intelligent design systems to shape bold new digital experiences — building solutions that learn, respond, and evolve with purpose and imagination.”
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Michael Goslin. Designed with purpose.</p>
+        </footer>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const toggleIcon = document.getElementById('toggleIcon');
+        const toggleText = document.getElementById('toggleText');
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                toggleIcon.textContent = '🌙';
+                toggleText.textContent = 'Dark Mode';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                toggleIcon.textContent = '☀️';
+                toggleText.textContent = 'Light Mode';
+            }
+        });
+    </script>
+</body>
+</html>
